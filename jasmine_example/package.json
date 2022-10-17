@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "jasmin": "^0.0.2",
+    "jasmine": "^4.4.0"
+  }
+}
