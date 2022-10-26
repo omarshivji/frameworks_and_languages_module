@@ -11,8 +11,6 @@ app.get('/', (req, res) => {
 })
 
 app.post('/attendee', (req, res) => {
-  console.log('I got a post')
-  console.log('I got res.body', req.body)
   ATTENDEES.push(req.body)
   res.status(201).json(req.body)
 })
