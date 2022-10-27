@@ -4,12 +4,16 @@ const port = 8000
 
 app.use(express.json());
 
+ITEMS = []
+
 app.get('/', (req, res) => {
-    res.send('Hello')
+    res.send('<html><body>Your Items</body></html>')
   })
 
-  app.get('/item', (req, res) => {
-   res.json('<html><body>Your Items</body></html>')
+
+  app.post('/item', (req, res) => {
+    ITEMS.push(req.body)
+    res.status(201).json(req.body)
   })
 
   app.listen(port, () => {
