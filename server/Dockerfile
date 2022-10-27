@@ -1,5 +1,5 @@
 FROM node:alpine
-WORKDIR /app/
+WORKDIR /server/
 RUN npm install express
-COPY app.js .
-CMD ["node", "app.js"]
+COPY server.js .
+CMD ["node", "server.js"]
