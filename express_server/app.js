@@ -1,32 +1,33 @@
-const express = require('express')
-const app = express()
-const port = 8000
 
-app.use(express.json());
+// const express = require('express')
+// const app = express()
+// const port = 8000
 
-ATTENDEES = []
+// app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('<html><body>Your HTML text</body></html>')
-})
+// ATTENDEES = []
 
-app.post('/attendee', (req, res) => {
-  ATTENDEES.push(req.body)
-  res.status(201).json(req.body)
-})
+// app.get('/', (req, res) => {
+//   res.send('<html><body>Your HTML text</body></html>')
+// })
 
-app.get('/attendees', (req, res) => {
-  res.json(ATTENDEES)
-})
+// app.post('/attendee', (req, res) => {
+//   ATTENDEES.push(req.body)
+//   res.status(201).json(req.body)
+// })
 
-app.delete('/attendee/:id', (req, res) => {
-  //console.log('Delete!', req.params.id, 123)
-  ATTENDEES = ATTENDEES.filter(o => o.id !== parseFloat(req.params.id))
-  res.status(204).json()
-})
+// app.get('/attendees', (req, res) => {
+//   res.json(ATTENDEES)
+// })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+// app.delete('/attendee/:id', (req, res) => {
+//   //console.log('Delete!', req.params.id, 123)
+//   ATTENDEES = ATTENDEES.filter(o => o.id !== parseFloat(req.params.id))
+//   res.status(204).json()
+// })
 
-process.on('SIGINT', function() {process.exit()})
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`)
+// })
+
+// process.on('SIGINT', function() {process.exit()})

@@ -15,8 +15,21 @@ app.post('/item', (req, res) => {
   res.status(201).json(req.body)
 })
 
+app.get('/items', (req, res) => {
+  res.json(ITEMS)
+})
+
+app.delete('/item/:itemId', (req, res) => {
+  console.log('Deleted', req.params.id)
+  ITEMS = ITEMS.filter(o => o.id !== req.params.id)
+  res.status(204).json()
+})
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+
   
 process.on('SIGINT', function() {process.exit()})
