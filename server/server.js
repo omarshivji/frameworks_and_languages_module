@@ -24,9 +24,13 @@ app.get('/', (req, res) => {
     res.send('<html><body>Your Items</body></html>')
   })
  
- app.post('/items', (req, res) => {
-  ITEMS.push(req.body)
-  res.status(201).json(req.body)
+ app.post('/item', (req, res) => {
+  if(isNaN(req.body.id)){
+    res.status(405).json(req.body)
+  }else{
+    ITEMS.push(req.body)
+    res.status(201).json(req.body)
+  }
 })
 
 app.get('/items', (req, res) => {
@@ -38,7 +42,6 @@ app.delete('/items/:itemId', (req, res) => {
   ITEMS = ITEMS.filter(o => o.id !== req.params.id)
   res.status(204).json()
 })
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
