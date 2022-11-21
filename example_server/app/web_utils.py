@@ -50,7 +50,7 @@ def options_response(request):
     >>> options_response({'path': '*', 'method': 'OPTIONS'})
     {'code': 204, 'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE', 'Access-Control-Allow-Headers': 'Content-Type'}
 
-    https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS
+    https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS 
     Pre-Flight Options for use with real browsers
     """
     return {
