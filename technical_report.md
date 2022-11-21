@@ -98,7 +98,10 @@ Client Language Features
 Critique of Server/Client prototype
 ---------------------
 
-### (name of Issue 1)
+### (Issue with error codes)
+
+(A code snippet example demonstrating the feature - 1 mark)
+
 ``` javascript
 
 RESPONSE_CODES = {
@@ -116,14 +119,10 @@ RESPONSE_CODES = {
     501: 'Not Implemented',
 }
 ```
-
-
-
-
-
-
-(A code snippet example demonstrating the feature - 1 mark)
 (Explain why this pattern is problematic - 40ish words 1 mark)
+
+This piece of code is problematic as it does not state all of the status codes. It has only identified 12 out of the 16 status codes.
+
 
 ### (name of Issue 2)
 
