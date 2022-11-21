@@ -99,6 +99,28 @@ Critique of Server/Client prototype
 ---------------------
 
 ### (name of Issue 1)
+``` javascript
+
+RESPONSE_CODES = {
+    200: 'OK',
+    201: 'Created',
+    204: 'No Content',
+    301: 'Moved Permanently',
+    304: 'Not Modified',
+    400: 'Bad Request',
+    401: 'Unauthorized',
+    403: 'Forbidden',
+    404: 'Not Found',
+    405: 'Method Not Allowed',
+    500: 'Internal Server Error',
+    501: 'Not Implemented',
+}
+```
+
+
+
+
+
 
 (A code snippet example demonstrating the feature - 1 mark)
 (Explain why this pattern is problematic - 40ish words 1 mark)
