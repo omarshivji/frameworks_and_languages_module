@@ -1,1 +1,4 @@
-FROM alpine
+FROM alpine:python
+WORKDIR /client/ 
+COPY . .
+CMD
