@@ -73,7 +73,7 @@ app.get('/item/:id', (req,res) => {
 // Filtering username 
 app.get('/items', (req,res)=> {
   if (req.query.user_id){
-    res.status(200).json(Object.values(ITEMS).filter(req.query.user_id)) // using object.values as it is filtering through the values from ITEMS
+    res.status(200).json(Object.values(ITEMS).filter(o => o.user_id == req.query.user_id)) // using object.values as it is filtering through the values from ITEMS
     return;
   }
   res.status(200).json(Object.values(ITEMS))
