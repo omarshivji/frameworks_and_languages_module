@@ -7,7 +7,6 @@ app.use(express.json());
 
 // Using dictionary for object items
 // https://stackoverflow.com/questions/383692/what-is-json-and-what-is-it-used-for/383699#383699
-
 var ITEMS = {
   0: {
       "id": 1,
@@ -33,9 +32,10 @@ var ITEMS = {
 
 // POST
 // https://medium.com/@anshurajlive/read-dictionary-data-or-convert-dictionary-into-an-array-of-objects-in-javascript-e9c52286d746
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 app.post('/item', (req, res) => {
-  const itemID = Object.keys(ITEMS).length +1 
-  const newDate = new Date().toJSON().slice(0,10)
+  const itemID = Object.keys(ITEMS).length +1 // using object.keys as it represents an array of ITEMS keys which is the ID, adding an extra array and assigning it to a data type. //IMPROVE RANDOM KEY GENERATOR if wanted
+  const newDate = new Date().toJSON().slice(0,10)  
   if(ITEMS.hasOwnProperty(itemID)){
     itemID = itemID + 1
   }
@@ -47,7 +47,7 @@ app.post('/item', (req, res) => {
       description: req.body.description,
       lat: req.body.lat,
       lon: req.body.lon,
-      date_from: newDate ,
+      date_from: newDate,
       date_to: newDate
     }
     res.status(201).json(ITEMS[itemID]) 
@@ -57,14 +57,12 @@ app.post('/item', (req, res) => {
   }
 })
   
-
 // GET
 app.get('/', (req, res) => {
     res.send('<html><body>Your Items</body></html>')
   })
 
 app.get('/item/:id', (req,res) => {
-
   if(ITEMS[req.params.id] === undefined){ // https://stackoverflow.com/questions/39045367/how-to-delete-on-express-without-specificate-the-whole-route (helped me figure out that if it displays undefined, then show 404 status)
     res.status(404).json('This item does not exist')
   } else{
@@ -75,7 +73,7 @@ app.get('/item/:id', (req,res) => {
 // Filtering username 
 app.get('/items', (req,res)=> {
   if (req.query.user_id){
-    res.status(200).json(Object.values(ITEMS).filter(o => o.user_id == req.query.user_id))
+    res.status(200).json(Object.values(ITEMS).filter(req.query.user_id)) // using object.values as it is filtering through the values from ITEMS
     return;
   }
   res.status(200).json(Object.values(ITEMS))

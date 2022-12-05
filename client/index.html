@@ -15,27 +15,35 @@
     <h1>HTML Boilerplate</h1>
     <!-- html here -->
     <div id="app"> 
-      
-
+    <h2>Create</h2>
           <form>
-            <input name="name" type="text" placeholder="type in your name">
-            <input name="notes" type="text" placeholder="type your notes">
-            <button>Attend</button>
+            <input name="user_id" placeholder="user_id">
+            <input name="lat" placeholder="lat">
+            <input name="lon" placeholder="lon">
+            <input name="image" placeholder="image">
+            <input name="keywords" placeholder="keywords">
+            <textarea name="description" placeholder="description"></textarea>
+            <button data-action="create_item">Create Item</button>
           </form>
     </div>
 
     <script>
      const { createApp } = Vue
     
-     const DEFAULT_API = '/api/v1';
-     const urlParams = new URLSearchParams(window.location.search);
-     const urlAPI = (urlParams.get('api') || DEFAULT_API).replace(/\/$/, '');
+     
+        // http://HOST:PORT/ADDRESS/OF/PAGE.HTML?query_param1=a&query_param2=b&api=http://localhost:8000
+    // Get api url (default to `CURRENT_HOST/api/v1`) (and remove trailing slash if present)
+    const DEFAULT_API = '/api/v1';
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
       createApp({
         data() {
           return {
             message: 'Hello Vue!'
           }
         }
+
+
       }).mount('#app')
       
     </script>
