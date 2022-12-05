@@ -1,15 +1,52 @@
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link id="favicon" rel="shortcut icon" type="image/png" href="data:image/png;base64,....==" />
+    <title>Boilerplate</title>
+    <style>
 
-<div id="app">{{ message }}</div>
+    /* styles here */
 
-<script>
-  const { createApp } = Vue
+    </style>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <h1>HTML Boilerplate</h1>
+    <!-- html here -->
+    <div id="app"> 
+      
 
-  createApp({
-    data() {
-      return {
-        message: 'Hello Vue!'
-      }
-    }
-  }).mount('#app')
+          <form>
+            <input name="name" type="text" placeholder="type in your name">
+            <input name="notes" type="text" placeholder="type your notes">
+            <button>Attend</button>
+          </form>
+    </div>
+
+    <script>
+     const { createApp } = Vue
+    
+     const DEFAULT_API = '/api/v1';
+     const urlParams = new URLSearchParams(window.location.search);
+     const urlAPI = (urlParams.get('api') || DEFAULT_API).replace(/\/$/, '');
+      createApp({
+        data() {
+          return {
+            message: 'Hello Vue!'
+          }
+        }
+      }).mount('#app')
+      
+    </script>
+<script type="module">
+
+    // javascript here
+
 </script>
+</body>
+</html>
+
+
+
+

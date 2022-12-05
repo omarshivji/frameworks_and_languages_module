@@ -1,5 +1,5 @@
-FROM alpine:python
-WORKDIR /client/ 
+FROM python:alpine
+WORKDIR /app/ 
 COPY . .
 EXPOSE 8001
-CMD ["http.server", "-m", "python3", "8001"]
+CMD ["python3", "-m", "http.server", "8001"]
