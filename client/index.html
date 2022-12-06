@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <link id="favicon" rel="shortcut icon" type="image/png" href="data:image/png;base64,....==" />
+    <meta name="viewport" content="width=device-width">
     <title>Freestyle</title>
     <style>
 
@@ -29,7 +30,7 @@
 </head>
 <body>
     <h1>HTML Boilerplate</h1>
-    <!-- html here -->
+    
     <div id="app"> 
     <h2>Create</h2>
           <form @submit.prevent="create_item" data-action="user_id">
@@ -71,27 +72,36 @@
         </ul>
     </div>
 
-    <script>
-      
+    
+<script type="module">
+
+    // javascript here
     const { createApp } = Vue
     const DEFAULT_API = '/api/v1';
     const urlParams = new URLSearchParams(window.location.search);
     const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
-      createApp({
-        data() {
-          return {
-            message: 'Hello Vue!'
-          }
+
+    createApp({
+      data() {
+        return {
+          ITEMS: {
+            id:'',
+            user_id:'',
+            keywords:'',
+            description:'',
+            image:'',
+            lat:'',
+            lon:'',
+            date_from:'',
+            date_to:'',
+          },
+          ITEMS: [],
         }
+      }
 
 
-      }).mount('#app')
+    }).mount('#app')
       
-    </script>
-<script type="module">
-
-    // javascript here
-
 </script>
 </body>
 </html>
