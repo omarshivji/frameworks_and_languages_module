@@ -3,10 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <link id="favicon" rel="shortcut icon" type="image/png" href="data:image/png;base64,....==" />
-    <title>Boilerplate</title>
+    <title>Freestyle</title>
     <style>
 
     /* styles here */
+
+    h1
+    {
+      background-color:cyan;
+      box-shadow:5px 5px 5px black;
+      width:300px;
+    }
+    h2
+    {
+      background-color: gray;
+      box-shadow: 5px 5px 5px;
+      width:130px;
+      color: cyan;
+      padding:10px;
+    }
+    
 
     </style>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -16,23 +32,48 @@
     <!-- html here -->
     <div id="app"> 
     <h2>Create</h2>
-          <form>
-            <input name="user_id" placeholder="user_id">
-            <input name="lat" placeholder="lat">
-            <input name="lon" placeholder="lon">
-            <input name="image" placeholder="image">
-            <input name="keywords" placeholder="keywords">
-            <textarea name="description" placeholder="description"></textarea>
-            <button data-action="create_item">Create Item</button>
+          <form @submit.prevent="create_item" data-action="user_id">
+
+            <div class>
+            <input name="user_id" placeholder="user_id"> <br>
+            </div>
+
+            <div class>
+            <input name="lat" placeholder="0"> <br>
+            </div>
+
+            <div class>
+            <input name="lon" placeholder="0"> <br>
+            </div>
+
+            <div class>
+            <input name="image" placeholder="Image"> <br>
+            </div>
+
+            <div class>
+            <input name="keywords" placeholder="Keywords"> <br>
+            </div>
+
+            <div class>
+            <textarea name="description" placeholder="Description"></textarea> <br>
+            </div>
+            
+            <button data-action="create_item">Create Item</button> <br>
           </form>
+
+          <h2>Items</h2>
+
+        <ul>
+          <li>
+            <img src="item.large">
+            <span data-field="id">item.id</span>
+          </li>
+        </ul>
     </div>
 
     <script>
-     const { createApp } = Vue
-    
-     
-        // http://HOST:PORT/ADDRESS/OF/PAGE.HTML?query_param1=a&query_param2=b&api=http://localhost:8000
-    // Get api url (default to `CURRENT_HOST/api/v1`) (and remove trailing slash if present)
+      
+    const { createApp } = Vue
     const DEFAULT_API = '/api/v1';
     const urlParams = new URLSearchParams(window.location.search);
     const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
