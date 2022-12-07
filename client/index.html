@@ -13,15 +13,13 @@
     {
       background-color:cyan;
       box-shadow:5px 5px 5px black;
-      width:300px;
+      width:200px;
     }
     h2
     {
-      background-color: gray;
-      box-shadow: 5px 5px 5px;
+      background-color: cyan;
+      box-shadow: 5px 5px 5px black;
       width:130px;
-      color: cyan;
-      padding:10px;
     }
     
 
@@ -29,50 +27,41 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-  <h1>HTML Boilerplate</h1>
+  <h1>FreeCycle</h1>
   
   <div id="app"> 
   <h2>Create</h2>
         <form @submit.prevent="create_item" data-action="user_id">
 
           <div class>
-          <input name="user_id" placeholder="user_id"> <br>
-          </div>
-
-          <div class>
-          <input name="lat" placeholder="0"> <br>
-          </div>
-
-          <div class>
-          <input name="lon" placeholder="0"> <br>
-          </div>
-
-          <div class>
-          <input name="image" placeholder="Image"> <br>
-          </div>
-
-          <div class>
-          <input name="keywords" placeholder="Keywords"> <br>
-          </div>
-
-          <div class>
-          <textarea name="description" placeholder="Description"></textarea> <br>
-          </div>
+          <input v-model="item_user_id" input name="user_id" placeholder="User_id"> <br>
           
-          <button data-action="create_item">Create Item</button> <br>
+          <input v-model="item_lat" input name="lat" placeholder="0"> <br>
+         
+          <input v-model="item_lon" input name="lon" placeholder="0"> <br>
+         
+          <input v-model="item_image" input name="image" placeholder="Image"> <br>
+         
+          <input v-model="item_keywords" input name="keywords" placeholder="Keywords"> <br>
+          
+          <input v-model="item_description"textarea name="description" placeholder="Description"></textarea> <br>
+
+          <button data-action="create_item" type="submit">Create Item</button> <br>
+
         </form>
-
-        <h2>Items</h2>
-
-      <ul>
-        <li>
-          <img src="item.large">
-          <span data-field="id">item.id</span>
-        </li>
-      </ul>
-  </div>
-
-    
+      
+        <ul>
+          <li v-for="Item in Items">
+            <span>{{item_user_id}}</span>
+            <span>{{item_lat}}</span>
+            <span>{{item_lon}}</span>
+            <span>{{item_image}}</span>
+            <span>{{item_keywords}}</span>
+            <span>{{item_description}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
 <script type="module">
 
   // javascript here
@@ -82,68 +71,74 @@
   const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
 
   createApp({
-  data() {
-    return {
-      ITEM: {
-        id:'',
-        user_id:'',
-        keywords:'',
-        description:'',
-        image:'',
-        lat:'',
-        lon:'',
-        date_from:'',
-        date_to:'',
+      data() {
+        return {
+          item: {
+            id:'',
+            user_id:'',
+            keywords:'',
+            description:'',
+            image:'',
+            lat:'',
+            lon:'',
+            date_from:'',
+            date_to:'',
+          },
+          items:[],
+        }
       },
-      ITEMS: [],
-    }
-  },
-  created() {
-    this.clear_ITEM()
-    this.get_ITEMS()
-  },
-  methods:{
-    clear_ITEM() {
-      this.ITEM = { ...this.ITEM, ...{
-        user_id: '',
-        keywords: '',
-        description: '',
-        image: '',
-        lat: '',
-        lon: '',
-      }}
-    },
-    getItems() {
-      fetch(`${urlAPI}/items`, {
-      method: 'GET',
-    })
-      .then(response => response.json())
-      .then(data. this.ITEMS = data)
-      .catch(err => console.error(err));
-          items = json  // save the json we got back into the variable `items`
-    },
-    createItem(){
-      fetch(`${urlAPI}/item`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(this.ITEM),
-    })
-        .then(response => response.json())
-        .then(json => console.log('createItems()', json))
-        .then(this.clear_ITEM)
-        .then(this.get_ITEMS)
-        .catch(err => console.error(err));
-    },
-    deleteItem(id) {
-    fetch(`${urlAPI}/item/${id}`, {
-        method: 'DELETE',
-    })
-        .then(json => console.log('deleteItem()', json))
-    .catch(err => console.error(err));
-  }
-}
+      created() {
+        this.clear_ITEM()
+        this.get_ITEMS()
+      },
+    methods:{
+      // Clears all forms
+      clear_ITEM(){
+        this.item= { ...this.item, ...{
+            user_id:'',
+            keywords:'',
+            description:'',
+            image:'',
+            lat:'',
+            lon:'',
+            
+            
+        }}
+      },
+        get_ITEMS() {
+         fetch(`${urlAPI}/items`, {
+            method: 'GET',
+          })
+          .then(response => response.json())
+          .then(data => this.items=data)
+          .catch(err => console.error(err));
+        },
 
-}).mount('#app')
+        
+        createItem() {
+         fetch(`${urlAPI}/item`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(this.item),
+          })
+          .then(response => response.json())
+          .then(json => console.log('create_item()', json))
+          .then(this.clear_ITEM)
+          .then(this.get_ITEMS)
+        .catch(err => console.error(err));
+        },
+
+        // Deletes items by item's ID
+        deleteItem(item_id){
+            fetch(`${urlAPI}/item/${item_id}`,{
+                method: 'DELETE',
+            })
+            .then(json => console.log('deleteItem()', json))
+            .then(this.get_ITEMS)
+              .catch(err => console.error(err));
+        }
+      },
+    }).mount('#app')
       
 </script>
 </body>
