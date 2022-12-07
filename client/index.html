@@ -29,78 +29,121 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <h1>HTML Boilerplate</h1>
-    
-    <div id="app"> 
-    <h2>Create</h2>
-          <form @submit.prevent="create_item" data-action="user_id">
+  <h1>HTML Boilerplate</h1>
+  
+  <div id="app"> 
+  <h2>Create</h2>
+        <form @submit.prevent="create_item" data-action="user_id">
 
-            <div class>
-            <input name="user_id" placeholder="user_id"> <br>
-            </div>
+          <div class>
+          <input name="user_id" placeholder="user_id"> <br>
+          </div>
 
-            <div class>
-            <input name="lat" placeholder="0"> <br>
-            </div>
+          <div class>
+          <input name="lat" placeholder="0"> <br>
+          </div>
 
-            <div class>
-            <input name="lon" placeholder="0"> <br>
-            </div>
+          <div class>
+          <input name="lon" placeholder="0"> <br>
+          </div>
 
-            <div class>
-            <input name="image" placeholder="Image"> <br>
-            </div>
+          <div class>
+          <input name="image" placeholder="Image"> <br>
+          </div>
 
-            <div class>
-            <input name="keywords" placeholder="Keywords"> <br>
-            </div>
+          <div class>
+          <input name="keywords" placeholder="Keywords"> <br>
+          </div>
 
-            <div class>
-            <textarea name="description" placeholder="Description"></textarea> <br>
-            </div>
-            
-            <button data-action="create_item">Create Item</button> <br>
-          </form>
+          <div class>
+          <textarea name="description" placeholder="Description"></textarea> <br>
+          </div>
+          
+          <button data-action="create_item">Create Item</button> <br>
+        </form>
 
-          <h2>Items</h2>
+        <h2>Items</h2>
 
-        <ul>
-          <li>
-            <img src="item.large">
-            <span data-field="id">item.id</span>
-          </li>
-        </ul>
-    </div>
+      <ul>
+        <li>
+          <img src="item.large">
+          <span data-field="id">item.id</span>
+        </li>
+      </ul>
+  </div>
 
     
 <script type="module">
 
-    // javascript here
-    const { createApp } = Vue
-    const DEFAULT_API = '/api/v1';
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
+  // javascript here
+  const { createApp } = Vue
+  const DEFAULT_API = '/api/v1';
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
 
-    createApp({
-      data() {
-        return {
-          ITEMS: {
-            id:'',
-            user_id:'',
-            keywords:'',
-            description:'',
-            image:'',
-            lat:'',
-            lon:'',
-            date_from:'',
-            date_to:'',
-          },
-          ITEMS: [],
-        }
-      }
+  createApp({
+  data() {
+    return {
+      ITEM: {
+        id:'',
+        user_id:'',
+        keywords:'',
+        description:'',
+        image:'',
+        lat:'',
+        lon:'',
+        date_from:'',
+        date_to:'',
+      },
+      ITEMS: [],
+    }
+  },
+  created() {
+    this.clear_ITEM()
+    this.get_ITEMS()
+  },
+  methods:{
+    clear_ITEM() {
+      this.ITEM = { ...this.ITEM, ...{
+        user_id: '',
+        keywords: '',
+        description: '',
+        image: '',
+        lat: '',
+        lon: '',
+      }}
+    },
+    getItems() {
+      fetch(`${urlAPI}/items`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(data. this.ITEMS = data)
+      .catch(err => console.error(err));
+          items = json  // save the json we got back into the variable `items`
+    },
+    createItem(){
+      fetch(`${urlAPI}/item`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(this.ITEM),
+    })
+        .then(response => response.json())
+        .then(json => console.log('createItems()', json))
+        .then(this.clear_ITEM)
+        .then(this.get_ITEMS)
+        .catch(err => console.error(err));
+    },
+    deleteItem(id) {
+    fetch(`${urlAPI}/item/${id}`, {
+        method: 'DELETE',
+    })
+        .then(json => console.log('deleteItem()', json))
+    .catch(err => console.error(err));
+  }
+}
 
-
-    }).mount('#app')
+}).mount('#app')
       
 </script>
 </body>
