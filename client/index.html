@@ -4,64 +4,72 @@
     <meta charset="utf-8" />
     <link id="favicon" rel="shortcut icon" type="image/png" href="data:image/png;base64,....==" />
     <meta name="viewport" content="width=device-width">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <title>Freestyle</title>
     <style>
 
     /* styles here */
 
-    h1
-    {
-      background-color:cyan;
-      box-shadow:5px 5px 5px black;
-      width:200px;
-    }
-    h2
-    {
-      background-color: cyan;
-      box-shadow: 5px 5px 5px black;
-      width:130px;
-    }
+  
     
 
     </style>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-  <h1>FreeCycle</h1>
+  <h1 class="text-center">FreeCycle</h1>
   
   <div id="app"> 
-  <h2>Create</h2>
+  <h2 class="container my-3">Create</h2>
         <form @submit.prevent="create_item" data-action="user_id">
 
-          <div class>
-          <input v-model="item_user_id" input name="user_id" placeholder="User_id"> <br>
-          
-          <input v-model="item_lat" input name="lat" placeholder="0"> <br>
-         
-          <input v-model="item_lon" input name="lon" placeholder="0"> <br>
-         
-          <input v-model="item_image" input name="image" placeholder="Image"> <br>
-         
-          <input v-model="item_keywords" input name="keywords" placeholder="Keywords"> <br>
-          
-          <input v-model="item_description"textarea name="description" placeholder="Description"></textarea> <br>
-
+          <div class="container my-3">
+          <label class="col-sm-1">Username: </label>
+          <input v-model="item_user_id" name="user_id" placeholder="Enter User ID"> <br>
+          </div>
+          <div class="container my-3">
+          <label class="col-sm-1">Latitude: </label>
+          <input v-model="item_lat" name="lat" placeholder="0"> <br>
+          </div>
+          <div class="container my-3">
+          <label class="col-sm-1">Longitude: </label>
+          <input v-model="item_lon" name="lon" placeholder="0"> <br>
+          </div>
+          <div class="container my-3">
+          <label class="col-sm-1">Image: </label>
+          <input v-model="item_image" name="image" type="url"placeholder="Image"> <br>
+          </div>
+          <div class="container my-3">
+          <label class="col-sm-1">Keywords: </label>
+          <input v-model="item_keywords" name="keywords" placeholder="Keywords"> <br>
+          </div>
+          <div class="container my-3">
+          <label class="col-sm-1">Description: </label>
+          <input v-model="item_description" textarea name="description" placeholder="Description"></textarea> <br>
+          </div>
+          <div class="container my-3">
           <button data-action="create_item" type="submit">Create Item</button> <br>
+          </div>
 
         </form>
-      
+        <h3 class="container my-3">Items</h3>
         <ul>
-          <li v-for="Item in Items">
-            <span>{{item_user_id}}</span>
-            <span>{{item_lat}}</span>
-            <span>{{item_lon}}</span>
-            <span>{{item_image}}</span>
-            <span>{{item_keywords}}</span>
-            <span>{{item_description}}</span>
-          </li>
+          <li v-for="Items in Items">
+                  <span> ID: {{item.id}}</span>
+            <span>user_id: {{item_user_id}}</span>
+            <span>lat: {{item_lat}}</span>
+            <span>lon: {{item_lon}}</span>
+            <span>keywords: {{item_keywords}}</span>
+            <span>description: {{item_description}}</span>
+            <span>{{item.date_from}}</span>
+            </div>
+         </div>
         </ul>
-      </div>
-    </div>
+      </li>
+  </div>
+    
 <script type="module">
 
   // javascript here
@@ -69,6 +77,7 @@
   const DEFAULT_API = '/api/v1';
   const urlParams = new URLSearchParams(window.location.search);
   const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
+ // https://8001-omarshivji-frameworksan-rzzl8kp72gm.ws-eu78.gitpod.io?api=https://8000-omarshivji-frameworksan-rzzl8kp72gm.ws-eu78.gitpod.io
 
   createApp({
       data() {
@@ -101,8 +110,6 @@
             image:'',
             lat:'',
             lon:'',
-            
-            
         }}
       },
         get_ITEMS() {
