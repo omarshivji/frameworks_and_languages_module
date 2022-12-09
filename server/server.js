@@ -53,7 +53,7 @@ app.post('/item', (req, res) => {
     res.status(201).json(ITEMS[itemID]) 
   }
   else {
-    res.status(405).json('Missing field')
+    res.status(405).json('Field is missing')
   }
 })
   
