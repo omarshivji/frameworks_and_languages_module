@@ -18,7 +18,14 @@
     </style>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
-<body>
+<body style="background-color:rgb(200, 209, 211);">
+  <nav class="navbar navbar-light" style="background-color: #0095ff;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">FreeCycle</a>
+    </div>
+  </nav>
+  
+
   <h1 class="text-center">FreeCycle</h1>
   
   <div id="app"> 
@@ -50,26 +57,33 @@
             <input v-model="item.description" textarea name="description" placeholder="Description"></textarea> <br>
             </div>
             <div class="container my-3">
-            <button data-action="create_item" type="submit">Create Item</button> <br>
+            <button data-action="create_item" @click="createItem(item.id)" class="btn btn-primary"  type="submit">Create Item</button> <br>
             </div>
   
           </form>
           <h3 class="container my-3">Items</h3>
           <ul>
+            <div class="container my-3">
             <li v-for="item in items">
-              <span>ID: {{item.id}}</span>
-              <span>User_id: {{item.user_id}}</span>
-              <span>Latitude: {{item.lat}}</span>
-              <span>Longitude: {{item.lon}}</span>
-              <span>Keywords: {{item.keywords}}</span>
-              <span>Description: {{item.description}}</span>
-              <span>{{item.date_from}}</span>
-              </div>
-              <button data-action="delete" @click="deleteItem(item.id)" class="btn-danger">Delete item</button>
-           </div>
-          </ul>
-        </li>
+                <!-- https://getbootstrap.com/docs/5.2/components/card/#example -->
+                <div class="card" style="width: 18rem;">
+                    <img src="item.image" alt="placeholder">
+                    <div class="card-body">
+              <span data-field="id">{{item.id}}</span>
+              <span data-field="User_id">{{item.user_id}}</span>
+              <span data-field="Latitude">{{item.lat}}</span>
+              <span data-field="Longitude">{{item.lon}}</span>
+              <span data-field="Keywords">{{item.keywords}}</span>
+              <span data-field="Description">{{item.description}}</span>
+              <span data-field="Date">{{item.date_from}}</span>
+              <button data-action="delete" @click="deleteItem(item.id)" class=" btn btn-primary">Delete item</button>
+             </ul>
+          </li>
+       </div>
     </div>
+</div>
+      
+    
     
 <script type="module">
 
