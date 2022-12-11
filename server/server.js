@@ -70,7 +70,7 @@ app.get('/', (req, res) => {
   })
 
 app.get('/item/:id', (req,res) => {
-  if(ITEMS[req.params.id] = ''){ // https://stackoverflow.com/questions/39045367/how-to-delete-on-express-without-specificate-the-whole-route (helped me figure out that if it displays undefined, then show 404 status)
+  if(ITEMS[req.params.id] === undefined){ // https://stackoverflow.com/questions/39045367/how-to-delete-on-express-without-specificate-the-whole-route (helped me figure out that if it displays undefined, then show 404 status)
     res.status(404).json('This item does not exist')
   } else{
     res.status(200).json(ITEMS[req.params.id])
