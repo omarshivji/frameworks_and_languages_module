@@ -12,6 +12,46 @@
 
     /* styles here */
 
+    /* This is a CSS style */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+}
+
+h1 {
+  color: rgb(0, 0, 0);
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+h2 {
+  color: rgb(41, 11, 72);
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+h3 {
+  color: rgb(41, 11, 72);
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
   
     
 
@@ -30,8 +70,7 @@
   
   <div id="app"> 
     <h2 class="container my-3">Create</h2>
-          <form @submit.prevent="create_item" data-action="user_id">
-  
+          
             <div class="container my-3">
             <label class="col-sm-1">Username: </label>
             <input v-model="item.user_id" name="user_id" placeholder="Enter User ID"> <br>
@@ -46,7 +85,7 @@
             </div>
             <div class="container my-3">
             <label class="col-sm-1">Image: </label>
-            <input v-model="item.image" name="image" type="url"placeholder="Image"> <br>
+            <input v-model="item.image" name="image" type="url" placeholder="Image"> <br>
             </div>
             <div class="container my-3">
             <label class="col-sm-1">Keywords: </label>
@@ -67,15 +106,15 @@
             <li v-for="item in items">
                 <!-- https://getbootstrap.com/docs/5.2/components/card/#example -->
                 <div class="card" style="width: 18rem;">
-                    <img src="item.image" alt="placeholder">
+                    <img src="item.image" alt="placeholder" style="width:100px;height:100px;">
                     <div class="card-body">
-              <span data-field="id">{{item.id}}</span>
-              <span data-field="User_id">{{item.user_id}}</span>
-              <span data-field="Latitude">{{item.lat}}</span>
-              <span data-field="Longitude">{{item.lon}}</span>
-              <span data-field="Keywords">{{item.keywords}}</span>
-              <span data-field="Description">{{item.description}}</span>
-              <span data-field="Date">{{item.date_from}}</span>
+              <p>ID: <span data-field="id">{{item.id}}</span> <br> </p>
+              <p>User ID: <span data-field="User_id">{{item.user_id}}</span> <br> </p>
+              <p>Latitude: <span data-field="Latitude">{{item.lat}}</span> <br> </p>
+              <p>Longitude: <span data-field="Longitude">{{item.lon}}</span> <br> </p>
+              <p>Keywords: <span data-field="Keywords">{{item.keywords}}</span> <br> </p>
+              <p>Description: <span data-field="Description">{{item.description}}</span> <br> </p>
+              
               <button data-action="delete" @click="deleteItem(item.id)" class=" btn btn-primary">Delete item</button>
              </ul>
           </li>
