@@ -5,6 +5,11 @@ var cors = require('cors')
 
 app.use(express.json()); 
 
+app.use(cors({
+  methods: ['GET','POST','DELETE','OPTIONS']
+}))
+
+
 // Using dictionary for object items
 // https://stackoverflow.com/questions/383692/what-is-json-and-what-is-it-used-for/383699#383699
 var ITEMS = {
