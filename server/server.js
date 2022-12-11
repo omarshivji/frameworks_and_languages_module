@@ -23,7 +23,7 @@ var ITEMS = {
       "lon": 1.0830275,
       "date_from": "2021-11-22T08:22:39.067408",
   },
-  1: {
+ /* 1: {
       "id": 2,
       "user_id": "user1546",
       "keywords": ["hammer", "nails", "tools"],
@@ -34,38 +34,21 @@ var ITEMS = {
       "date_from": "2021-11-22T08:22:39.067408",
       
   }
-  
+  */
 }
-
-function maxValue(itemID) {
-  // Get all items with the given itemID
-  var items = getItems(itemID);
-  // Set initial max value to 0
-  var maxValue = 0;
-  // Loop through all items and find the one with the highest value
-  for (var i = 0; i < items.length; i++) {
-  var itemValue = getItemValue(items[i]);
-  if (itemValue > maxValue) {
-  maxValue = itemValue;
-  }
-  }
-  // Return the max value
-  return maxValue;
-  }
-
 
 // POST
 // https://medium.com/@anshurajlive/read-dictionary-data-or-convert-dictionary-into-an-array-of-objects-in-javascript-e9c52286d746
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 app.post('/item', (req, res) => {
- // const itemID = Object.keys(ITEMS).length +1 // using object.keys as it represents an array of ITEMS keys which is the ID, adding an extra array and assigning it to a data type. //IMPROVE RANDOM KEY GENERATOR if wanted
+  const itemID = Object.keys(ITEMS).length +1 // using object.keys as it represents an array of ITEMS keys which is the ID, adding an extra array and assigning it to a data type. //IMPROVE RANDOM KEY GENERATOR if wanted
   const newDate = new Date().toJSON().slice(0,10)  
   if(ITEMS.hasOwnProperty(itemID)){
     itemID = itemID + 1
   }
   if (req.body.user_id && req.body.keywords && req.body.description && req.body.lat && req.body.lon !==""){ // requesting from dictionary 
     ITEMS[itemID] = { 
-      id: maxValue(Object.keys(itemID)),
+      id: itemID,
       user_id: req.body.user_id,
       keywords: req.body.keywords,
       description: req.body.description,
@@ -87,7 +70,7 @@ app.get('/', (req, res) => {
   })
 
 app.get('/item/:id', (req,res) => {
-  if(ITEMS[req.params.id] = ''){ // https://stackoverflow.com/questions/39045367/how-to-delete-on-express-without-specificate-the-whole-route (helped me figure out that if it displays undefined or '', then show 404 status)
+  if(ITEMS[req.params.id] === undefined){ // https://stackoverflow.com/questions/39045367/how-to-delete-on-express-without-specificate-the-whole-route (helped me figure out that if it displays undefined, then show 404 status)
     res.status(404).json('This item does not exist')
   } else{
     res.status(200).json(ITEMS[req.params.id])
