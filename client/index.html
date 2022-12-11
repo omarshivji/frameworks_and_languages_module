@@ -30,7 +30,7 @@
   
   <div id="app"> 
     <h2 class="container my-3">Create</h2>
-          <form @submit.prevent="createItem" data-action="user_id">
+          <form @submit.prevent="create_item" data-action="user_id">
   
             <div class="container my-3">
             <label class="col-sm-1">Username: </label>
@@ -57,7 +57,7 @@
             <input v-model="item.description" textarea name="description" placeholder="Description"></textarea> <br>
             </div>
             <div class="container my-3">
-            <button data-action="createItem" @click="createItem" class="btn btn-primary"  type="submit">Create Item</button> <br>
+            <button data-action="create_item" @click="create_item" class="btn btn-primary"  type="submit">Create Item</button> <br>
             </div>
   
           </form>
@@ -139,14 +139,14 @@
         },
 
         
-        createItem() {
+        create_item() {
          fetch(`${url}/item`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(this.item),
           })
           .then(response => response.json())
-          .then(json => console.log('createItem()', json))
+          .then(json => console.log('create_item()', json))
           .then(this.clear_ITEM)
           .then(this.get_ITEMS)
         .catch(err => console.error(err));
