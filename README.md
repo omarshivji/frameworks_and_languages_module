@@ -38,7 +38,7 @@ make build
 
 make run
 ```
-### Testing client
+### Testing Client
 
 To test the client, (close both server and client ports in terminals with CTRL+C), open a new terminal and run the following command:
 
