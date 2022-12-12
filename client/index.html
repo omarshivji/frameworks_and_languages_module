@@ -11,23 +11,64 @@
     <style>
 
     /* styles here */
+    h1 {
+      color: rgb(190, 190, 190);
+      
+      
+    }
 
-    /* This is a CSS style */
+    h2 {
+      color: rgb(192, 192, 192);
+      
+      
+    }
 
+    h3 {
+      color: rgb(190, 190, 190);
+      
+      
+    }
+    
+    label{
+    color: rgb(192, 192, 192);
+	  display: block;
+	  padding: 10px;
+	  margin: 3px;
+    }
 
+    body {
+      background-color:#293640;
+
+    }
 
   
-    
-
     </style>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
-<body style="background-color:rgb(200, 209, 211);">
-  <nav class="navbar navbar-light" style="background-color: #0095ff;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">FreeCycle</a>
+<body>
+          
+<!-- NAVBAR-->
+<nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm" >
+  <div class="container">
+    <a href="#" class="navbar-brand">
+      <!-- Logo Image -->
+      <img src="https://bootstrapious.com/i/snippets/sn-nav-logo/logo.png" width="45" style="background-color: rgb(137, 145, 147);" class="d-inline-block align-middle mr-2">
+      <!-- Logo Text -->
+      <span class="text-uppercase font-weight-bold">FreeCycle</span>
+    </a>
+
+    <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+
+    <div id="navbarSupportedContent" class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active"><a href="#" class="nav-link">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
   
 
   <h1 class="text-center">FreeCycle</h1>
@@ -35,54 +76,62 @@
   <div id="app"> 
     <h2 class="container my-3">Create</h2>
           
-            <div class="container my-3">
-            <label class="col-sm-1">Username: </label>
-            <input v-model="item.user_id" name="user_id" placeholder="Enter User ID"> <br>
-            </div>
-            <div class="container my-3">
-            <label class="col-sm-1">Latitude: </label>
-            <input v-model="item.lat" name="lat" placeholder="0"> <br>
-            </div>
-            <div class="container my-3">
-            <label class="col-sm-1">Longitude: </label>
-            <input v-model="item.lon" name="lon" placeholder="0"> <br>
-            </div>
-            <div class="container my-3">
-            <label class="col-sm-1">Image: </label>
-            <input v-model="item.image" name="image" type="url" placeholder="Image"> <br>
-            </div>
-            <div class="container my-3">
-            <label class="col-sm-1">Keywords: </label>
-            <input v-model="item.keywords" name="keywords" placeholder="Keywords"> <br>
-            </div>
-            <div class="container my-3">
-            <label class="col-sm-1">Description: </label>
-            <input v-model="item.description" textarea name="description" placeholder="Description"></textarea> <br>
-            </div>
-            <div class="container my-3">
-            <button data-action="create_item" @click="create_item" class="btn btn-primary"  type="submit">Create Item</button> <br>
-            </div>
+    <div class="container my-3">
+    <label class="col-sm-1">Username: </label>
+    <input v-model="item.user_id" name="user_id" placeholder="Enter User ID"> <br>
+    </div>
+    <div class="container my-3">
+    <label class="col-sm-1">Latitude: </label>
+    <input v-model="item.lat" name="lat" placeholder="0"> <br>
+    </div>
+    <div class="container my-3">
+    <label class="col-sm-1">Longitude: </label>
+    <input v-model="item.lon" name="lon" placeholder="0"> <br>
+    </div>
+    <div class="container my-3">
+    <label class="col-sm-1">Image: </label>
+    <input v-model="item.image" name="image" type="url" placeholder="Image"> <br>
+    </div>
+    <div class="container my-3">
+    <label class="col-sm-1">Keywords: </label>
+    <input v-model="item.keywords" name="keywords" placeholder="Keywords"> <br>
+    </div>
+    <div class="container my-3">
+    <label class="col-sm-1">Description: </label>
+    <input v-model="item.description" textarea name="description" placeholder="Description"></textarea> <br>
+    </div>
+    <div class="container my-3">
+    <button data-action="create_item" @click="create_item" class="btn btn-primary"  type="submit">Create Item</button> <br>
+    </div>
+
   
           </form>
-          <h3 class="container my-3">Items</h3>
+          <h3 class="text-center my-5">Items</h3>
           <ul>
-            <div class="container my-3">
+            <div class="col-sm-1">
             <li v-for="item in items">
                 <!-- https://getbootstrap.com/docs/5.2/components/card/#example -->
                 <div class="card" style="width: 18rem;">
-                    <img src="item.image" alt="placeholder" style="width: 200px;height:200px;" card="card-img-top">
+
+                    <img 
+                      :src="item.image" 
+                      alt="placeholder" 
+                      style="width: 280px;height: 200px;" 
+                      card="card-img-top">
+                    <div class="container my-3">
                     <div class="card-body">
-              <p>ID: <span data-field="id">{{item.id}}</span> <br> </p>
-              <p>User ID: <span data-field="User_id">{{item.user_id}}</span> <br> </p>
-              <p>Latitude: <span data-field="Latitude">{{item.lat}}</span> <br> </p>
-              <p>Longitude: <span data-field="Longitude">{{item.lon}}</span> <br> </p>
-              <p>Keywords: <span data-field="Keywords">{{item.keywords}}</span> <br> </p>
-              <p>Description: <span data-field="Description">{{item.description}}</span> <br> </p>
+                      <p>ID: <span data-field="id">{{item.id}}</span> <br> </p>
+                      <p>User ID: <span data-field="User_id">{{item.user_id}}</span> <br> </p>
+                      <p>Latitude: <span data-field="Latitude">{{item.lat}}</span> <br> </p>
+                      <p>Longitude: <span data-field="Longitude">{{item.lon}}</span> <br> </p>
+                      <p>Keywords: <span data-field="Keywords">{{item.keywords}}</span> <br> </p>
+                      <p>Description: <span data-field="Description">{{item.description}}</span> <br> </p>
               <button data-action="delete" @click="deleteItem(item.id)" class=" btn btn-primary">Delete item</button>
              </ul>
           </li>
        </div>
     </div>
+</div>
 </div>
       
     
@@ -167,6 +216,9 @@
     
     }).mount('#app')
       
+// References
+// https://getbootstrap.com/docs/5.2/layout/grid/
+
 </script>
 </body>
 </html>
