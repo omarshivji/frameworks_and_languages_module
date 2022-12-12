@@ -11,7 +11,6 @@ app.use(cors({
 
 
 // Using dictionary for object items
-// https://stackoverflow.com/questions/383692/what-is-json-and-what-is-it-used-for/383699#383699
 var ITEMS = {
   0: {
       "id": 1,
@@ -38,12 +37,10 @@ var ITEMS = {
 }
 
 // POST
-// https://medium.com/@anshurajlive/read-dictionary-data-or-convert-dictionary-into-an-array-of-objects-in-javascript-e9c52286d746
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 app.post('/item', (req, res) => {
   const itemID = Object.keys(ITEMS).length +1 // using object.keys as it represents an array of ITEMS keys which is the ID, adding an extra array and assigning it to a data type. //IMPROVE RANDOM KEY GENERATOR if wanted
   const newDate = new Date().toJSON().slice(0,10)  
-  if(ITEMS.hasOwnProperty(itemID)){
+  if(ITEMS.hasOwnProperty(itemID)){ // checks to see if ITEMS has itemID
     itemID = itemID + 1
   }
   if (req.body.user_id && req.body.keywords && req.body.description && req.body.lat && req.body.lon !==""){ // requesting from dictionary 
@@ -93,7 +90,7 @@ app.get('/items', (req, res) => {
 //DELETE
 app.delete('/item/:id', (req, res) => {
   let idITEMS = parseInt(req.params.id) // Getting and turning the id into an integer 
-  if(ITEMS.hasOwnProperty(idITEMS))
+  if(ITEMS.hasOwnProperty(idITEMS)) // checks if ITEMS has idITEMS
 {
   delete ITEMS[idITEMS]
   res.status(204).send('Deleted')
@@ -104,8 +101,6 @@ else {
 })
 
 //CORS 
-// https://expressjs.com/en/resources/middleware/cors.html
-
 app.use(cors({
   origin: "http://localhost:8000/",
   methods: ['POST','GET','OPTIONS','DELETE'],
@@ -116,3 +111,14 @@ app.listen(port, () => {
 })
   // Exit with CTRL + C
 process.on('SIGINT', function() {process.exit()})
+
+/* references
+https://medium.com/@anshurajlive/read-dictionary-data-or-convert-dictionary-into-an-array-of-objects-in-javascript-e9c52286d746
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+https://github.com/KieranBest/frameworks_and_languages_module
+https://expressjs.com/en/resources/middleware/cors.html
+https://github.com/KieranBest/frameworks_and_languages_module
+https://stackoverflow.com/questions/383692/what-is-json-and-what-is-it-used-for/383699#383699
+https://github.com/NathanSmallcalder/frameworks_and_languages_module
+https://github.com/calaldees/frameworks_and_languages_module
+*/
