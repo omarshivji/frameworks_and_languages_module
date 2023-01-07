@@ -1,34 +1,83 @@
+
 Technical Report
+
 ================
+
+  
 
 (intro)
 
+  
+  
 
 Server Framework Features
+
 -------------------------
 
-### (name of Feature 1)
 
-(Technical description of the feature - 40ish words - 1 mark)
-(A code block snippet example demonstrating the feature - 1 mark)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words - 1 mark)
-(Provide reference urls to your sources of information about the feature - required)
+### Routing
 
 
-### (name of Feature 2)
+An application's routing describes how its endpoints (URIs) are connected with a specific function that is invoked when a client requests that endpoint. Routing is an integral part of every web application, as it directs incoming requests to the correct controllers or handlers.
 
-(Technical description of the feature - 40ish words - 1 mark)
-(A code block snippet example demonstrating the feature - 1 mark)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words - 1 mark)
-(Provide reference urls to your sources of information about the feature - required)
+``` javascript
+const  express = require('express')
+
+const  app = express()
+
+// GET
+
+app.get('/', (req, res) => {
+
+res.send('<html><body>Your Items</body></html>')
+
+})
+```
+
+This code creates a route that will handle GET requests to the root path ('/'). When a client makes a GET request to this route, the callback function is called and an HTML document with the text "Your Items" is returned to the client.
+
+(https://www.simplilearn.com/tutorials/nodejs-tutorial/what-is-express-js#:~:text=Express%20is%20a%20node%20js,helps%20manage%20servers%20and%20routes.
+
+https://expressjs.com/en/guide/routing.html)
 
 
-### (name of Feature 3)
+### (Middleware)
 
-(Technical description of the feature - 40ish words - 1 mark)
-(A code block snippet example demonstrating the feature - 1 mark)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words - 1 mark)
-(Provide reference urls to your sources of information about the feature - required)
+Middleware functions have access to the request and response objects, as well as the next function in the request-response cycle of the application. Middleware methods may be used to do things like parse request contents, add CORS headers, log requests, and more.
+
+```javascript
+const  express = require('express')
+
+const  app = express()
+
+
+app.use((req, res, next) => {
+
+console.log('Time:', Date.now())
+
+next()
+
+})
+```
+
+The 'app.use()' function is used to register the middleware function, which will apply it to all routes in the application. The 'next' function is a specific function supplied to middleware functions that is used to transmit control to the next middleware function in the request-response cycle of the application. If the middleware function does not call 'next', the request-response cycle is terminated and the client receives no response.
+
+
+(https://expressjs.com/en/guide/using-middleware.html
+https://www.tutorialspoint.com/expressjs/expressjs_middleware.htm)
+
+
+### Debug
+
+Debugging is the process of detecting and correcting faults or bugs in an application. It is possible to use tools such as the 'console.log()' function, the Node.js debugger, linters, and request/response tests to do this. Debugging is essential for increasing an application's stability and dependability, as well as making it easier to maintain and upgrade.
+
+```shell
+$ DEBUG=express:* node index.js
+``` 
+The 'DEBUG' environment variable is used to enable debugging output for a Node.js application. It can be set to a specific module name or prefix to enable debugging output for that module or group of modules. Running 'node' with the name of the script you want to debug and the DEBUG environment variable set will enable debugging output for the Express.js application. This can help to identify problems in the code.
+
+(https://expressjs.com/en/guide/debugging.html
+https://www.tutorialspoint.com/expressjs/expressjs_debugging.htm)
 
 
 Server Language Features
